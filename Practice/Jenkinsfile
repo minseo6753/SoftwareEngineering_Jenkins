@@ -54,15 +54,6 @@ pipeline {
             }
         }
 
-        stage('Mail-Test') {
-            steps {
-                emailext (
-                    subject: "TEST Subject",
-                    body: "Test Message",
-                    to: "minsir6753@gmail.com"
-                )
-            }
-        }
     }
 
 
@@ -79,6 +70,18 @@ pipeline {
 
         success {
             echo "Build and test succeeded!"
+
+            emailext(
+                        subject: "[SUCCESS] ${JOB_NAME} #${BUILD_NUMBER}",
+                        body: """
+                            Build Success
+
+                            Job: ${JOB_NAME}
+                            Build Number: ${BUILD_NUMBER}
+                            URL: ${BUILD_URL}
+                        """,
+                        to: "minsir6753@gmail.com"
+                    )
         }
     }
 }
