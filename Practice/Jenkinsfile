@@ -53,19 +53,18 @@ pipeline {
                 '''
             }
         }
-    }
 
-    stages {
-            stage('Mail-Test') {
-                steps {
-                    emailext (
-                        subject: "TEST Subject",
-                        body: "Test Message",
-                        to: "minsir6753@gmail.com"
-                    )
-                }
+        stage('Mail-Test') {
+            steps {
+                emailext (
+                    subject: "TEST Subject",
+                    body: "Test Message",
+                    to: "minsir6753@gmail.com"
+                )
             }
         }
+    }
+
 
     post {
         always {
